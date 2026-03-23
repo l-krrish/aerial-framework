@@ -22,12 +22,14 @@ add_library(framework-tensor STATIC)
 target_sources(
     framework-tensor
     PRIVATE src/data_types.cpp src/tensor_info.cpp src/tensor_arena.cpp
+            src/power_normalization.cpp
     PUBLIC FILE_SET
            HEADERS
            BASE_DIRS
            include
            FILES
            include/tensor/data_types.hpp
+           include/tensor/power_normalization.hpp
            include/tensor/tensor_numerology.hpp
            include/tensor/tensor_info.hpp
            include/tensor/tensor_arena.hpp)

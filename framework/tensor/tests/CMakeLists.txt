@@ -16,14 +16,19 @@
 enable_testing()
 
 include(GoogleTest)
-include(${CMAKE_SOURCE_DIR}/cmake/Tests.cmake)
+include(${CMAKE_SOURCE_DIR}[Tests.cmake](http://_vscodecontentref_/3))
 
-add_executable(tensor_tests_sample tensor_sample_tests.cpp)
+add_executable(tensor_tests_sample [tensor_sample_tests.cpp](http://_vscodecontentref_/4))
+add_executable(power_normalization_tests power_normalization_tests.cpp)
 
 target_include_directories(tensor_tests_sample PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(power_normalization_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(tensor_tests_sample PRIVATE framework::warnings framework::options
                                                   framework::tensor)
+target_link_libraries(power_normalization_tests PRIVATE framework::warnings framework::options
+                                                        framework::tensor)
 target_link_system_libraries(tensor_tests_sample PRIVATE GTest::gtest_main)
+target_link_system_libraries(power_normalization_tests PRIVATE GTest::gtest_main)
 
 add_test(
     NAME tensor_tests.sample
@@ -31,4 +36,10 @@ add_test(
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 label_parallel(tensor_tests.sample)
 
-add_custom_target(tensor_tests DEPENDS tensor_tests_sample)
+add_test(
+    NAME tensor_tests.power_normalization
+    COMMAND power_normalization_tests --gtest_output=xml:power_normalization_tests.xml
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+label_parallel(tensor_tests.power_normalization)
+
+add_custom_target(tensor_tests DEPENDS tensor_tests_sample power_normalization_tests)
