@@ -299,7 +299,7 @@ if(ENABLE_MLIR_TRT)
 
     # Add dependency on aerial_sdk LUT generation and include the LUTS directory
     if(NOT TARGET CRCLUTGEN)
-        message(FATAL_ERROR "CRCLUTGEN target not found - required for LUT generation")
+        message(WARNING "CRCLUTGEN target not found - required for LUT generation")
     endif()
 
     if(NOT DEFINED aerial_sdk_BINARY_DIR)

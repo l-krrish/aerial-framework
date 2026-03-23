@@ -28,7 +28,7 @@ add_library(
     sample_module_factories.cpp sample_pipeline_factory.cpp
 my_scale_module.cpp my_scale_module_kernel.cu)
 
-target_include_directories(sample-pipeline PuBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(sample-pipeline PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(sample-pipeline PUBLIC framework::utils framework::memory framework::tensor
                                              framework::tensorrt framework::pipeline rt_log)
